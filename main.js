@@ -28,7 +28,7 @@ let myIcon = L.icon({
   iconUrl: "images/icon-location.svg",
 });
 
-let marker = L.marker([lat, lng], {
+let marker = L.marker([lat, lng - 0.0005], {
   icon: myIcon,
 }).addTo(map);
 
@@ -43,9 +43,13 @@ form.addEventListener("submit", async (event) => {
 
   const formInput = input.value;
 
-  const response = await fetch(
-    `https://geo.ipify.org/api/v2/country,city?apiKey=at_7gTryzKoWlXH6wtYoMmOfk8LvtjjE&domain=${formInput}`
-  );
+  let url = `https://geo.ipify.org/api/v2/country,city?apiKey=at_7gTryzKoWlXH6wtYoMmOfk8LvtjjE&domain=${formInput}`;
+
+  if (formInput.includes(":")) {
+    url = `https://geo.ipify.org/api/v2/country,city?apiKey=at_7gTryzKoWlXH6wtYoMmOfk8LvtjjE&ipAddress=${formInput}`;
+  }
+
+  const response = await fetch(url);
 
   const data = await response.json();
 
@@ -55,6 +59,8 @@ form.addEventListener("submit", async (event) => {
   }
 
   console.log(data);
+
+  input.value = data.ip;
 
   ip.innerHTML = data.ip;
   recevedLocation.innerHTML = `${data.location.city}, ${data.location.region} ${data.location.postalCode}`;
@@ -66,9 +72,10 @@ form.addEventListener("submit", async (event) => {
 
   map.setView([lat, lng]);
 
-  marker.setLatLng([lat, lng]);
+  marker.setLatLng([lat, lng - 0.0005]);
 });
 
-// form.submit();
-
 button.click();
+
+// 52.66.144.183
+// 2345:0425:2CA1:0000:0000:0567:5673:23b5
