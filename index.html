@@ -16,12 +16,57 @@
 
     <script src="main.js" defer></script>
     <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
   </head>
   <body>
-    <main><h1></h1></main>
-    IP Address Tracker Search for any IP address or domain IP Address Location
-    Timezone UTC
+    <div class="pattern-map">
+      <div class="background-pattern"></div>
+      <div id="map"></div>
+    </div>
+    <main>
+      <h1>IP Address Tracker</h1>
+      <form>
+        <input
+          type="text"
+          placeholder="Search for any IP address or domain"
+          aria-label="search-input"
+        />
+        <button type="submit">
+          <img src="images/icon-arrow.svg" alt="arrow icon" />
+        </button>
+      </form>
+
+      <div class="info">
+        <div>
+          <h2>IP Address</h2>
+          <p class="ip">192.212.174.101</p>
+        </div>
+        <div>
+          <h2>Location</h2>
+          <p class="location">Brooklyn, NY 10001</p>
+        </div>
+        <div>
+          <h2>Timezone</h2>
+          <p><span>UTC </span><span class="timezone">-05:00</span></p>
+        </div>
+        <div>
+          <h2>ISP</h2>
+          <p class="isp">SpaceX StarLink</p>
+        </div>
+      </div>
+    </main>
+
     <!-- add offset value dynamically using the API -->
-    ISP
   </body>
 </html>
